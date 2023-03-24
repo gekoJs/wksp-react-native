@@ -1,0 +1,167 @@
+REACT-NATIVE--------------------------------
+    - surgio en el 2015
+
+    - su finalidad es llevar el mundo que ya conocemos de react a desarrollo mobile
+
+    - hibrid framework/multi platform (works for apple and android) before we needed to know languages like kotlin for android and swift for appple
+
+    - similar to react
+
+    - menor performance que si codearamos la app en un lenguaje destinado a dicho sistema operativo
+REACT-NATIVE--------------------------------
+
+herramientas--------------------------------
+    para el manejo del proyecto, boiler plate, apk etc
+
+    EXPO------------------------------------
+
+        INSTALATION → npm install -g expo-cli
+        CREACION DEL BOILER PLATE DONDE HenryApp es el nombre de la aplicacion a crear → expo init HenryApp
+        LEVANTAMOS EL PROYECTO → expo init HenryApp
+
+        PARA CORRERLO EN EL TELF DESCARGAR LA APP → Expo Go
+
+        VENTAJAS →
+            - simple initial configuration
+            - developing with live reload almost instant
+        
+        DISADVANTAGES →
+            - isn't possible to include own native code
+
+    EXPO------------------------------------
+herramientas--------------------------------
+
+COMPONENTES BASICOS-------------------------
+    Ya no podemos usar mas las etiquetas del DOM html (div, p, h1 etc)
+
+    ya se android o IOS tienen sus propios elementos
+
+    (1) View → es como si fuera un div, un agrupador
+    Text → es como un p, its a component for displaying text
+    
+    (2) Image → a component for displaying images
+        <Image source={require('./img/henryLogo.png')} />
+
+        al haber distinta configuracion de pantallas en los dispositivos en lo que a densidad de pixeles se refiere react native permite definir dentro de la carpeta en donde se encuentren las imagenes definir tres tamaños de imagenes
+
+        henryLogo.png
+        henryLogo@2x.png
+        henryLogo@3x.png
+
+        segun el dispositivo, el bundler va a tomar una imagen u otra
+
+        ademas de que si por error tenemos muchas imagenes en la carpeta, el bundler va a tomar solo aquellas imagenes que esten referenciadas en el codigo lo cual hace que nuestro apk no se llene de archivos innecesarios
+
+    (3) TextInput → a component for inputting text into the app via a keyboard
+    (4) ScrollView → Provides a scrolling container that can host multiple components and views
+            
+            allows scrolling vertically or horizontaly inside our app
+
+            all elements are rendered even thought are not actually visible on screen 
+                EXAMPLE →
+                si tuviera 10 millones de elementos para renderizar, este lo renderizaria todo para recien ahi empezar a permitir la interaccion con el scroll
+            
+            PARA EVITAR ESTO APARECEN DOS ALTERNATIVAS →
+
+            (4.1) FlatList & SectionList    →   estos renderizan solamente los elementos que actualmente son visibles en pantallas
+
+                (4.1.1) <FlatList /> recibe dos parametros 
+                    data: fuente de informacion
+                    renderItem: funcion que a partur de cada elemento de data devuelve el componente a renderizar
+                (4.1.2) <SectionList/> recibe dos parametros
+                    sections: fuente de informacion separada por secciones(arreglo contenido "title" y "data")
+                    renderItem: funcion que a partir de cada elemento de "data" devuelve el componente a renderizar
+    (5) StyleSheet → provides an abstraction layer similar to css styleSheets
+
+
+COMPONENTES BASICOS-------------------------
+
+STYLES--------------------------------------
+
+    - Todos los componentes aceptan una prop llamada "style"
+
+    - las reglas css son las mismas pero en formato camelCase
+    
+    - se puede utilizar StyleSheet.create para agrupar estilos
+
+    - se pueden pasar estilos como propiedad a los componentes hijos
+
+    - todas las dimensiones son sin unidades, representando density-independent pixels
+
+    los estilos se crean en un objeto para despues pasarlos a los componentes con la propiedad style
+    asi se asemeja el comportamiento de las clases
+
+        <View style={styles.container}>
+            <Text style={{color: 'red'}}>just red</Text>
+            <Text style={styles.red}>just red</Text>
+            <Text style={{color: 'blue', fontWeight: 'bold', fontSize: 30}}>just bigBlue</Text>
+            <Text style={styles.bigBlue}>just bigBlue</Text>
+        </View>
+
+        const styles = StyleSheet.create({
+        container: {
+            marginTop: 50,
+        },
+        bigBlue: {
+            color: 'blue',
+            fontWeight: 'bold',
+            fontSize: 30,
+        },
+        red: {
+            color: 'red',
+        },
+        });
+        
+        DIMENSIONES-------------------------
+        
+            FIXED DIMENSIONS  → 
+                <view>
+                    <view style={{width: 150, height: 150, backgroundColor: "powderblue"}} />
+                </view>
+                es con pixeles, el tamaño varia segun la densidad de pixeles que tenga el dispositivo que abre la app
+            
+
+            FLEX DIMENSIONS     →
+                <view style = {{flex:1}}>
+                    <view style={{flex7, backgroundColor: "powderblue"}} />
+                    <view style={{flex2, backgroundColor: "skyblue"}} />
+                    <view style={{flex3, backgroundColor: "steelblue"}} />
+                </view>
+
+                Podemos volver a utilizar flex con unas diferencias
+                    -flex direction por defecto es column
+            
+            PERCENTAGE DIMENSIONS   →   
+                <view style:{{height: "90%", width: "50%"}}> //si width o height no estuvieran escritos react toma como que abarca el 100%
+                    <view style={{width: "15%", height: "50%", backgroundColor: "powderblue"}} />
+                    <view style={{width: "33%", height: "30%", backgroundColor: "powderblue"}} />
+                </view>
+                 
+        DIMENSIONES-------------------------
+STYLES--------------------------------------
+
+TOUCHES-------------------------------------
+    Basic button → <Button
+                        onPress={()=>{
+                            alert("wow")
+                        }}
+                        title="login"
+                    />
+    
+    Touchable components
+        <TouchableHighlight/>           //se pone clarito al precionarlo
+        <TouchableOpacity/>             //se pone opaco al presionarlo
+        <TouchableWithoutFeedback/>     //no tiene ningun estilo
+
+        tienen un comportamiento particular de estilos
+        tienen una propiedad adicional → onLongPress 
+            de agregarse el usuario debe mantener presionado el boton para lanzar el evento
+TOUCHES-------------------------------------
+
+NAVIGATION----------------------------------
+    Stack Navigation → apretar un boton y se apila una nueva nueva pantalla
+        npm install @react-navigation/native @react-navigation/stack
+        expo install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+    Tab Navigation → cuadro de navegacion en la parte baja de la pantalla con varios recuadros que al darles touch nos permite navegar
+    Drawer Navigation → hamburguer menu
+NAVIGATION----------------------------------

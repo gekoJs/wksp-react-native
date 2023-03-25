@@ -160,8 +160,11 @@ TOUCHES-------------------------------------
 
 NAVIGATION----------------------------------
     Stack Navigation → apretar un boton y se apila una nueva nueva pantalla
+
         npm install @react-navigation/native @react-navigation/stack
+    
         expo install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+    
     Tab Navigation → cuadro de navegacion en la parte baja de la pantalla con varios recuadros que al darles touch nos permite navegar
     Drawer Navigation → hamburguer menu
 NAVIGATION----------------------------------
